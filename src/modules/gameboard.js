@@ -1,13 +1,6 @@
-import Ship from './ship';
-
 const gameBoard = () => {
   const boardArray = [];
-
-  const carrier = Ship(1, 'carrier');
-  const battleship = Ship(2, 'battleship');
-  const cruiser = Ship(3, 'cruiser');
-  const submarine = Ship(4, 'submarine');
-  const destroyer = Ship(5, 'destoryer');
+  const ships = [];
 
   const createBoard = () => {
     for (let i = 0; i < 10; i += 1) {
@@ -37,6 +30,9 @@ const gameBoard = () => {
       for (let i = 0; i < ship.shipLength; i += 1) {
         boardArray[y][x + i] = ship.shipMarker;
       }
+
+      // If there's nothing wrong add the ship to the ships array
+      ships.push(ship);
     } else if (rotation === 'vertical') {
       if (y + ship.shipLength > 10) {
         return 'Ship is too far down, ship not placed';
@@ -50,26 +46,27 @@ const gameBoard = () => {
       for (let i = 0; i < ship.shipLength; i += 1) {
         boardArray[y + i][x] = ship.shipMarker;
       }
+
+      // If there's nothing wrong add the ship to the ships array
+      ships.push(ship);
     }
-    return boardArray;
+    return ships;
   };
 
   const missedAttacks = [];
 
   const receiveAttack = (x, y) => {
     const coordinates = boardArray[y][x];
+    // If coordinates are a string there is a ship there
     if (typeof coordinates === 'string') {
-      if (coordinates === 'carrier') {
-        carrier.hit();
-      } else if (coordinates === 'battleship') {
-        battleship.hit();
-      } else if (coordinates === 'cruiser') {
-        cruiser.hit();
-      } else if (coordinates === 'submarine') {
-        submarine.hit();
-      } else if (coordinates === 'destroyer') {
-        destroyer.hit();
-      }
+      /* Go through the ship array and check which marker of a ship
+      is equal to the coordinates. Hit that ship */
+      ships.forEach((ship) => {
+        if (ship.shipMarker === coordinates) {
+          ship.hit();
+        }
+      });
+    // If there wasn't a hit, add the attack to missed attacks
     } else {
       missedAttacks.push(coordinates);
       return missedAttacks;

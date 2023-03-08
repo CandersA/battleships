@@ -2,10 +2,11 @@
 import gameBoard from '../src/modules/gameboard';
 import Ship from '../src/modules/ship';
 
+const testBoard = gameBoard();
+testBoard.createBoard();
+
 describe('Test gameboard creation', () => {
   test('Create board should produce a 10x10 2D array', () => {
-    const testBoard = gameBoard();
-    testBoard.createBoard();
     expect(testBoard.boardArray[3][9]).toBe(9);
     expect(testBoard.boardArray[7][7]).toBe(7);
     expect(testBoard.boardArray[9][0]).toBe(0);
@@ -13,9 +14,6 @@ describe('Test gameboard creation', () => {
 });
 
 describe('Test ship placement on board', () => {
-  const testBoard = gameBoard();
-  testBoard.createBoard();
-
   const cruiser = Ship(3, 'cruiser');
   const submarine = Ship(4, 'submarine');
   const destroyer = Ship(5, 'destroyer');
@@ -63,5 +61,18 @@ describe('Test ship placement on board', () => {
     expect(testBoard.boardArray[4][7]).toBe(7);
 
     testBoard.createBoard();
+  });
+});
+
+describe('Test ships receiving attacks and missed attacks', () => {
+  const cruiser = Ship(3, 'cruiser');
+
+  test('If a ship receives attacks equal to its length it should sink', () => {
+    testBoard.placeShip(6, 5, 'horizontal', cruiser);
+    testBoard.receiveAttack(6, 5);
+    testBoard.receiveAttack(7, 5);
+    expect(cruiser.isSunk()).toBe(false);
+    testBoard.receiveAttack(8, 5);
+    expect(cruiser.isSunk()).toBe(true);
   });
 });
