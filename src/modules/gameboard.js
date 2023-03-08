@@ -56,6 +56,9 @@ const gameBoard = () => {
   const missedAttacks = [];
 
   const receiveAttack = (x, y) => {
+    if (x > 9 || y > 9) {
+      return 'Attack is out of game board';
+    }
     const coordinates = boardArray[y][x];
     // If coordinates are a string there is a ship there
     if (typeof coordinates === 'string') {
@@ -68,17 +71,21 @@ const gameBoard = () => {
       });
     // If there wasn't a hit, add the attack to missed attacks
     } else {
-      missedAttacks.push(coordinates);
+      missedAttacks.push([x, y]);
       return missedAttacks;
     }
     return coordinates;
   };
+
+  const didShipsSink = () => ships.every((ship) => ship.isSunk() === true);
 
   return {
     createBoard,
     placeShip,
     receiveAttack,
     boardArray,
+    missedAttacks,
+    didShipsSink,
   };
 };
 

@@ -2,10 +2,9 @@
 import gameBoard from '../src/modules/gameboard';
 import Ship from '../src/modules/ship';
 
-const testBoard = gameBoard();
-testBoard.createBoard();
-
 describe('Test gameboard creation', () => {
+  const testBoard = gameBoard();
+  testBoard.createBoard();
   test('Create board should produce a 10x10 2D array', () => {
     expect(testBoard.boardArray[3][9]).toBe(9);
     expect(testBoard.boardArray[7][7]).toBe(7);
@@ -14,6 +13,8 @@ describe('Test gameboard creation', () => {
 });
 
 describe('Test ship placement on board', () => {
+  const testBoard = gameBoard();
+  testBoard.createBoard();
   const cruiser = Ship(3, 'cruiser');
   const submarine = Ship(4, 'submarine');
   const destroyer = Ship(5, 'destroyer');
@@ -59,13 +60,14 @@ describe('Test ship placement on board', () => {
     expect(testBoard.boardArray[4][5]).toBe('cruiser');
     expect(testBoard.boardArray[5][3]).toBe(3);
     expect(testBoard.boardArray[4][7]).toBe(7);
-
-    testBoard.createBoard();
   });
 });
 
 describe('Test ships receiving attacks and missed attacks', () => {
+  const testBoard = gameBoard();
+  testBoard.createBoard();
   const cruiser = Ship(3, 'cruiser');
+  const carrier = Ship(1, 'carrier');
 
   test('If a ship receives attacks equal to its length it should sink', () => {
     testBoard.placeShip(6, 5, 'horizontal', cruiser);
@@ -74,5 +76,28 @@ describe('Test ships receiving attacks and missed attacks', () => {
     expect(cruiser.isSunk()).toBe(false);
     testBoard.receiveAttack(8, 5);
     expect(cruiser.isSunk()).toBe(true);
+  });
+
+  test('Add attack to missed attacks', () => {
+    testBoard.receiveAttack(6, 6);
+    expect(testBoard.missedAttacks[0]).toStrictEqual([6, 6]);
+    testBoard.receiveAttack(8, 3);
+    expect(testBoard.missedAttacks[1]).toStrictEqual([8, 3]);
+    expect(testBoard.missedAttacks.length).toBe(2);
+  });
+
+  test('Dont execute if attack is out of gameboard', () => {
+    testBoard.receiveAttack(10, 8);
+    testBoard.receiveAttack(8, 10);
+    testBoard.receiveAttack(10, 10);
+    expect(testBoard.missedAttacks.length).toBe(2);
+  });
+
+  test('Return true if all ships have sunk', () => {
+    expect(testBoard.didShipsSink()).toBe(true);
+    testBoard.placeShip(3, 1, 'horizontal', carrier);
+    expect(testBoard.didShipsSink()).toBe(false);
+    testBoard.receiveAttack(3, 1);
+    expect(testBoard.didShipsSink()).toBe(true);
   });
 });
