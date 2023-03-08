@@ -19,12 +19,22 @@ const gameBoard = () => {
       if (x + ship.shipLength > 10) {
         return 'Ship is too far to the right, ship not placed';
       }
+      for (let j = 0; j < ship.shipLength; j += 1) {
+        if (typeof boardArray[y][x + j] === 'string') {
+          return 'Ship overlaps another ship';
+        }
+      }
       for (let i = 0; i < ship.shipLength; i += 1) {
         boardArray[y][x + i] = ship.shipMarker;
       }
     } else if (rotation === 'vertical') {
       if (y + ship.shipLength > 10) {
         return 'Ship is too far down, ship not placed';
+      }
+      for (let j = 0; j < ship.shipLength; j += 1) {
+        if (typeof boardArray[y + j][x] === 'string') {
+          return 'Ship overlaps another ship';
+        }
       }
       for (let i = 0; i < ship.shipLength; i += 1) {
         boardArray[y + i][x] = ship.shipMarker;
