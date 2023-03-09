@@ -1,3 +1,4 @@
 import './style.css';
+import UI from './modules/UI.js';
 
-console.log('js');
+UI.loadHomePage();

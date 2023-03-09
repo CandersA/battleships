@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="main.js"></script>
+    <title>Battleships</title>
+</head>
+<body>
+    
+    <div class="main">
+        <div class="gameboards notvisible">
+            <div>
+                <span class="playername" id="p1name">Player</span>
+                <div class="gameboard" id="gb1">
+                </div>
+            </div>
+            <div>
+                <span class="playername" id="p2name">Computer</span>
+                <div class="gameboard" id="gb2">
+                </div>
+            </div>
+        </div>
+        <div class="start">
+            <div class="modes">
+                <div class="switches">
+                    <button type="button" class="switch">Play against computer</button>
+                    <button type="button" class="switch">2 players</button>
+                </div>
+            </div>
+            <div class="players-entry">
+                <div class="player">
+                    <label for="player1">Enter player name</label>
+                    <input type="text" minlength="2" id="player1">
+                </div>
+                <div class="player notvisible">
+                    <label for="player2">Enter player name</label>
+                    <input type="text" minlength="2" id="player2">
+                </div>
+            </div>
+            <div class="launch">
+                <button type="button" class="launch-game">Launch game</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

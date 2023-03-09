@@ -1,4 +1,4 @@
-import gameBoard from './gameboard';
+import gameBoard from './gameboard.js';
 
 const player = (name, computer = false) => {
   const isComputer = computer;
@@ -47,7 +47,7 @@ const player = (name, computer = false) => {
     attack(opponent, x, y);
   };
 
-  const gameLost = () => playerBoard.didShipsSink();
+  const gameLoser = () => playerBoard.didShipsSink();
 
   return {
     playerBoard,
@@ -56,7 +56,7 @@ const player = (name, computer = false) => {
     getName,
     attack,
     attackAI,
-    gameLost,
+    gameLoser,
   };
 };
 

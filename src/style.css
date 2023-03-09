@@ -1,3 +1,107 @@
-h1 {
-    color: red;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+:root {
+    --accent-color: rgb(67, 55, 243);
+}
+
+button {
+    border: 0;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+button:hover,
+button:active {
+    cursor: pointer;
+    filter: brightness(90%);
+}
+
+input:focus {
+    outline: none;
+}
+
+.notvisible {
+    display: none !important;
+}
+
+.main {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.switches,
+.players-entry {
+    display: flex;
+    gap: 30px;
+}
+
+.switches button {
+    padding: 7px 15px;
+    font-size: 18px;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 18px;
+}
+
+.player input {
+    border: 0;
+    background-color: rgb(230, 230, 230);
+    padding: 5px 15px;
+}
+
+.launch {
+    margin-top: 30px;
+}
+
+.launch button {
+    padding: 20px 50px;
+    font-size: 30px;
+}
+
+.gameboards {
+    display: flex;
+    gap: 100px;
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(10, 45px);
+    margin: 10px 0;
+}
+
+.cell {
+    width: 45px;
+    height: 45px;
+    background-color: rgb(227, 238, 241);
+    border: 1px solid rgb(192, 190, 190);
+}
+
+.playername {
+    font-size: 18px;
 }
