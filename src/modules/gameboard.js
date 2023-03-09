@@ -77,6 +77,7 @@ const gameBoard = () => {
     return coordinates;
   };
 
+  // If any of the ships return false to isSunk() .every returns false
   const didShipsSink = () => ships.every((ship) => ship.isSunk() === true);
 
   return {
