@@ -95,11 +95,54 @@ input:focus {
     margin: 10px 0;
 }
 
+.carrier {
+    width: 70px;
+}
+
+.battleship {
+    width: 90px;
+}
+
+.cruiser {
+    width: 110px;
+}
+
+.submarine {
+    width: 130px;
+}
+
+.destroyer {
+    width: 150px;
+}
+
+.ships {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.gb1ships {
+    align-items: flex-end;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    gap: 50px
+}
+
 .cell {
     width: 45px;
     height: 45px;
     background-color: rgb(227, 238, 241);
+    color: rgb(227, 238, 241);
     border: 1px solid rgb(192, 190, 190);
+}
+
+.cell:hover {
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: var(--accent-color);
 }
 
 .playername {

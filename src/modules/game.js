@@ -14,7 +14,8 @@ const game = (() => {
   };
 
   const checkLoser = () => {
-    if (player1.gameLoser() === false && player2.gameLoser() === false) {
+    if (player1.gameLoser() === false
+    && player2.gameLoser() === false) {
       return false;
     }
 
